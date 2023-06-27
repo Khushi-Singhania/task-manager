@@ -1,20 +1,31 @@
-# Use an official Node.js runtime as the base image
-FROM node:14
+# Use a Python base image
+FROM python:3.9 as base
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install the application dependencies
-RUN npm install
-
-# Copy the entire application code to the working directory
+# Copy the project files to the container
 COPY . .
 
-# Expose the desired port (replace 3000 with your application's port if needed)
-EXPOSE 3000
+# Install the project dependencies
+RUN python -m pip install --upgrade pip
 
-# Define the command to start the application
-CMD [ "node", "index.html" ]
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run the unit tests
+RUN python -m unittest discover test_agriculture
+
+
+# Build the final production image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the project files from the previous stage
+COPY --from=base /app .
+
+# Expose any necessary ports
+EXPOSE 5000
+# Set the entrypoint command for the application
+CMD ["python", "test_agriculture.py",  "--port", "5000"]
