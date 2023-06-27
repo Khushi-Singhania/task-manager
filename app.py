@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
-@app.route('/') #, methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 def calculate_crop_yield():
