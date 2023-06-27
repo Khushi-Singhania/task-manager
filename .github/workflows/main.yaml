@@ -34,3 +34,6 @@ jobs:
           context: .
           push: true
           tags: docker.io/khushis/task-manager:latest
+          
+      - name: Run Python script
+        run: python app.py
