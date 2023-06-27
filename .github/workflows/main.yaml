@@ -59,26 +59,6 @@ jobs:
               with:
                 filename: site.zip
                 
-            - name: Upload Release Assets
-              uses: actions/upload-release-asset@v1
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-              with:
-                upload_url: ${{ steps.create_release.outputs.upload_url }}
-                asset_path: ./site.zip
-                asset_name: site-v${{ github.run_number }}.zip
-                asset_content_type: application/zip
-                
-            - name: Create a Github Release
-              id: create_release
-              uses: actions/create-release@v1
-              env:
-               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-              with:
-                tag_name: ${{ github.run_number }}
-                release_name: Release ${{ github.run_number }}
-            
-    
   build-project:
         name: Build Project
         runs-on: ubuntu-latest
