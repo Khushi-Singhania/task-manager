@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crop Yield Calculator</title>
+  <script>
+    function calculateYield() {
+      // Get field area and crop yield per hectare values from the input fields
+      var fieldArea = parseFloat(document.getElementById('field_area').value);
+      var cropYieldPerHectare = parseFloat(document.getElementById('crop_yield_per_hectare').value);
+
+      // Calculate the total yield
+      var totalYield = fieldArea * cropYieldPerHectare;
+
+      // Display the total yield
+      document.getElementById('total_yield').textContent = "Total Yield: " + totalYield;
+    }
+  </script>
+</head>
+<body>
+  <h1>Crop Yield Calculator</h1>
+  <form>
+    <label for="field_area">Field Area (in hectares):</label>
+    <input type="number" id="field_area" required><br><br>
+
+    <label for="crop_yield_per_hectare">Crop Yield per Hectare:</label>
+    <input type="number" id="crop_yield_per_hectare" required><br><br>
+
+    <button type="button" onclick="calculateYield()">Calculate Yield</button>
+  </form>
+
+  <p id="total_yield"></p>
+</body>
+</html>
