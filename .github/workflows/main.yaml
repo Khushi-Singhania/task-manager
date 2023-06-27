@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Run Python App
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -40,6 +40,7 @@ jobs:
         run: |
             python test_agriculture.py > output.txt 2>&1
             cat output.txt
+            
   release-project:
         name: Release Project
         runs-on: ubuntu-latest
@@ -49,21 +50,25 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                 name: static-site
+                
             - name: Display artifact
               run: ls -R
+              
             - name: Zip file
               uses: thedoctor0/zip-release@master
               with:
                 filename: site.zip
+                
             - name: Upload Release Assets
               uses: actions/upload-release-asset@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
               with:
-                upload_url: ${{steps.create_release.outputs.upload_url}}
+                upload_url: ${{ steps.create_release.outputs.upload_url }}
                 asset_path: ./site.zip
                 asset_name: site-v${{ github.run_number }}.zip
                 asset_content_type: application/zip
+                
             - name: Create a Github Release
               id: create_release
               uses: actions/create-release@v1
@@ -80,10 +85,13 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v2
+              
             - name: Install NPM
               run: npm i
+              
             - name: Build assests
               run: npm run build 
+              
             - name: Upload static-site artifacts
               uses: actions/upload-artifact@v3
               with:
