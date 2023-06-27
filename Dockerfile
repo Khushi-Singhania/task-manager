@@ -28,4 +28,4 @@ COPY --from=base /app .
 # Expose any necessary ports
 EXPOSE 5000
 # Set the entrypoint command for the application
-CMD ["python", "test_agriculture.py"]
+CMD ["python", "test_agriculture.py", , "--port", "5000"]
