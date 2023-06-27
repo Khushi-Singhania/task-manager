@@ -8,6 +8,8 @@ WORKDIR /app
 COPY . .
 
 # Install the project dependencies
+RUN python -m pip install --upgrade pip
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Run the unit tests
