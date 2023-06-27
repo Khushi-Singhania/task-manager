@@ -1,12 +1,29 @@
-FROM python:3.9
+# Use a Python base image
+FROM python:3.9 as base
 
+# Set the working directory
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
+# Copy the project files to the container
 COPY . .
 
-EXPOSE 3000
+# Install the project dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Run the unit tests
+RUN python -m unittest discover test_agriculture
+
+
+# Build the final production image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the project files from the previous stage
+COPY --from=base /app .
+
+# Expose any necessary ports
+
+# Set the entrypoint command for the application
 CMD ["python", "app.py"]
