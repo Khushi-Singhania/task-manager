@@ -55,14 +55,6 @@ jobs:
               uses: thedoctor0/zip-release@master
               with:
                 filename: site.zip
-            - name: Create a Github Release
-              id: create_release
-              uses: actions/create-release@v2
-              env:
-               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-              with:
-                tag_name: ${{ github.run_number }}
-                release_name: Release ${{ github.run_number }}
             - name: Upload Release Assets
               uses: actions/upload-release-asset@v1
               env:
@@ -72,6 +64,15 @@ jobs:
                 asset_path: ./site.zip
                 asset_name: site-v${{ github.run_number }}.zip
                 asset_content_type: application/zip
+            - name: Create a Github Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+              with:
+                tag_name: ${{ github.run_number }}
+                release_name: Release ${{ github.run_number }}
+            
     
   build-project:
         name: Build Project
