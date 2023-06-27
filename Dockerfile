@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN python -m unittest discover test_agriculture
 
 # Expose the backend port
-EXPOSE 8000
+EXPOSE 5000
 
 # Start the backend server
 CMD ["python", "app.py"]
