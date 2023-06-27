@@ -5,7 +5,7 @@ FROM python:3.9 as base
 WORKDIR /app
 
 # Copy the project files to the container
-COPY . .
+COPY . /app
 
 # Install the project dependencies
 RUN python -m pip install --upgrade pip
@@ -15,6 +15,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Run the unit tests
 RUN python -m unittest discover test_agriculture
 
+RUN npm install
+
+RUN npm run build
 
 # Build the final production image
 FROM python:3.9-slim
@@ -26,6 +29,10 @@ WORKDIR /app
 COPY --from=base /app .
 
 # Expose any necessary ports
-EXPOSE 8080
+EXPOSE 80
 # Set the entrypoint command for the application
 CMD ["python", "test_agriculture.py"]
+
+CMD npm run start
+
+CMD ["python", "app.py"]
