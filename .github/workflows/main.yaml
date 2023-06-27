@@ -36,4 +36,6 @@ jobs:
           tags: docker.io/khushis/task-manager:latest
           
       - name: Run Python script
-        run: python test_agriculture.py
+        run: |
+            python test_agriculture.py > output.txt 2>&1
+            cat output.txt
