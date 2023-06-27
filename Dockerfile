@@ -31,8 +31,8 @@ COPY --from=base /app .
 # Expose any necessary ports
 EXPOSE 80
 # Set the entrypoint command for the application
-CMD ["python", "test_agriculture.py"]
+#CMD ["python", "test_agriculture.py"]
 
 CMD npm run start
 
-CMD ["python", "app.py"]
+#CMD ["python", "app.py"]
