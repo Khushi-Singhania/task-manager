@@ -20,12 +20,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      - name: Build Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: false
-          tags: task-manager:latest
       - name: Pull Docker image
         uses: docker/build-push-action@v2
         with:
@@ -43,5 +37,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: task-manager:latest
-        
+          tags: docker.io/khushis/task-manager:latest
