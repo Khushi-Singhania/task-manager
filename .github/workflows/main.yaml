@@ -26,7 +26,14 @@ jobs:
           context: .
           push: false
           tags: task-manager:latest
-      
+      - name: Pull Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile 
+          pull: true
+          tags: task-manager:latest
+        
       - name: Run tests
         run: |
           docker run task-manager:latest python -m unittest discover tests
