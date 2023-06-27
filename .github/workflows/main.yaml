@@ -36,4 +36,4 @@ jobs:
           tags: docker.io/khushis/task-manager:latest
           
       - name: Run Python script
-        run: python app.py
+        run: python test_agriculture.py
