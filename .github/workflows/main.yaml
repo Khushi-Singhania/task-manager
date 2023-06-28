@@ -37,7 +37,5 @@ jobs:
           
       - name: Run Python script
         run: |
-            docker build -t task-manager:latest .
-            cat app.py
-            docker run -p 8080:5000 task-manager:latest
+          python3 test_agriculture.py
           
