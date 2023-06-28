@@ -1,9 +1,9 @@
 
 from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET'])#
 def home():
     return render_template('index.html')
 def calculate_crop_yield():
@@ -29,4 +29,5 @@ def calculate_crop_yield():
     print("Total yield:", total_yield, "kg")
 """
 if __name__ == '__main__':
-    app.run()
+    app.run(host='localhost', port=8080)
+

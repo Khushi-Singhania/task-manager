@@ -19,4 +19,4 @@ RUN python -m unittest discover test_agriculture
 EXPOSE 5000
 
 # Start the backend server
-CMD ["python", "app.py"]
+CMD ["python", "app.py", port=8080]
