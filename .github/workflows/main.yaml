@@ -38,6 +38,7 @@ jobs:
           
       - name: Run Python script
         run: |
+            cat requirements.txt
             python3 app.py
-            cat output.txt
+            cat requirements.txt
           
